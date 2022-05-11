@@ -1,0 +1,6 @@
+# baseURL
+@baseURL = http://localhost:3001
+
+###
+# Find All Users
+GET {{ baseURL }}/users
