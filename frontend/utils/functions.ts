@@ -7,17 +7,24 @@ export const ageCalculator = (string) => {
 };
 
 export const arrayFilter = (filter, items) => {
+  const newFilter = filter.toLowerCase().replace(/[^A-Z0-9]/gi, "");
   const newArray = items.filter((item) => {
-    const checkName = item.name.toLowerCase().includes(filter.toLowerCase());
+    const checkName = item.name
+      .toLowerCase()
+      .replace(/[^A-Z0-9]/gi, "")
+      .includes(newFilter);
     const checkAddress = item.address
       .toLowerCase()
-      .includes(filter.toLowerCase());
+      .replace(/[^A-Z0-9]/gi, "")
+      .includes(newFilter);
     const checkPhone = item.phone_number
       .toLowerCase()
-      .includes(filter.toLowerCase());
+      .replace(/[^A-Z0-9]/gi, "")
+      .includes(newFilter);
     const checkBirthday = item.birthday
       .toLowerCase()
-      .includes(filter.toLowerCase());
+      .replace(/[^A-Z0-9]/gi, "")
+      .includes(newFilter);
     return checkName || checkAddress || checkPhone || checkBirthday;
   });
   return newArray;

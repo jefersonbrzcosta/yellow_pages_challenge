@@ -13,16 +13,20 @@ const List = ({ items }: Props) => {
   const [users, setUsers] = React.useState<any>(items);
 
   React.useEffect(() => {
-    const newArray: SampleData[] = arrayFilter(searchFilter, items);
+    const timer = setTimeout(() => {
+      const newArray: SampleData[] = arrayFilter(searchFilter, items);
 
-    setErrorMessage(
-      newArray.length === 0 && searchFilter
-        ? "No results, please review your search or try a different one"
-        : ""
-    );
+      setErrorMessage(
+        newArray.length === 0 && searchFilter
+          ? "No results, please review your search or try a different one"
+          : ""
+      );
 
-    setUsers(() => [...newArray]);
-    !searchFilter && setUsers(items);
+      setUsers(() => [...newArray]);
+      !searchFilter && setUsers(items);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [searchFilter]);
 
   return (
