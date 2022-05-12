@@ -13,12 +13,10 @@ const WithStaticProps = () => {
     fetcher
   );
 
-  console.log(data);
-
   if (error)
     return (
       <div className="text-red-600 flex justify-center items-center h-screen">
-        An error has occurred.
+        An error has occurred. Maybe the External server is not running...
       </div>
     );
   if (!data)
