@@ -1,7 +1,7 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { NODE_ENV, PORT, ORIGIN, CREDENTIALS } from "@config";
+import { NODE_ENV, PORT } from "@config";
 import { Routes } from "@interfaces/routes.interface";
 
 class App {
@@ -29,7 +29,7 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());

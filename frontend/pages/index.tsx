@@ -9,9 +9,11 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const WithStaticProps = () => {
   const [fetchNextjs, setFetchNextjs] = useState(true);
   const { data, error } = useSWR(
-    fetchNextjs ? "/api/users" : "/api/users",
+    fetchNextjs ? "/api/users" : "http://localhost:3001/users",
     fetcher
   );
+
+  console.log(data);
 
   if (error)
     return (
@@ -32,7 +34,7 @@ const WithStaticProps = () => {
         title="Fetch External API"
         onChangeFun={() => setFetchNextjs((prevState) => !prevState)}
       />
-      <List items={data} />
+      <List items={fetchNextjs ? data : data.data} />
     </Layout>
   );
 };
