@@ -1,11 +1,17 @@
 import useSWR from "swr";
+import { useState } from "react";
 import Layout from "../components/Layout";
+import Toggle from "../components/Toggle";
 import List from "../components/List";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const WithStaticProps = () => {
-  const { data, error } = useSWR("/api/users", fetcher);
+  const [fetchNextjs, setFetchNextjs] = useState(true);
+  const { data, error } = useSWR(
+    fetchNextjs ? "/api/users" : "/api/users",
+    fetcher
+  );
 
   if (error)
     return (
@@ -22,6 +28,10 @@ const WithStaticProps = () => {
 
   return (
     <Layout title="Yellow Pages - Users List">
+      <Toggle
+        title="Fetch External API"
+        onChangeFun={() => setFetchNextjs((prevState) => !prevState)}
+      />
       <List items={data} />
     </Layout>
   );
